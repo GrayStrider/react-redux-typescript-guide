@@ -55,7 +55,7 @@ export type Reducer<S = any, A extends Action = Action> = (state: S | undefined,
  */
 export type ReducersMapObject<S = any, A extends Action = Action> = {
   [K in keyof S]: Reducer<S[K], A>;
-}
+};
 
 /**
  * Turns an object whose values are different reducer functions, into a single
@@ -76,7 +76,6 @@ export type ReducersMapObject<S = any, A extends Action = Action> = {
  *   object, and builds a state object with the same shape.
  */
 export function combineReducers<S, A extends Action = Action>(reducers: ReducersMapObject<S, A>): Reducer<S, A>;
-
 
 /* store */
 
@@ -100,16 +99,12 @@ export function combineReducers<S, A extends Action = Action>(reducers: Reducers
  *
  * @template D the type of things (actions or otherwise) which may be dispatched.
  */
-export interface Dispatch<D = Action> {
-  <A extends D>(action: A): A;
-}
+export type Dispatch<D = Action> = <A extends D>(action: A) => A;
 
 /**
  * Function to remove listener added by `Store.subscribe()`.
  */
-export interface Unsubscribe {
-  (): void;
-}
+export type Unsubscribe = () => void;
 
 /**
  * A store is an object that holds the application's state tree.
@@ -207,8 +202,10 @@ export type DeepPartial<T> = {[K in keyof T]?: DeepPartial<T[K]> };
  * @template D The type of all things which may be dispatched.
  */
 export interface StoreCreator {
-  <S, A extends Action, N>(reducer: Reducer<S, A>, enhancer?: StoreEnhancer<N>): Store<S, A, N>;
-  <S, A extends Action, N>(reducer: Reducer<S, A>, preloadedState: DeepPartial<S>, enhancer?: StoreEnhancer<N>): Store<S, A, N>;
+  <S, A extends Action, N>(reducer: Reducer<S, A>,
+                           enhancer?: StoreEnhancer<N>): Store<S, A, N>;
+  <S, A extends Action, N>(reducer: Reducer<S, A>,
+                           preloadedState: DeepPartial<S>, enhancer?: StoreEnhancer<N>): Store<S, A, N>;
 }
 
 /**

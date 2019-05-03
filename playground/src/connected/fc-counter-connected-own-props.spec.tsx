@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { render, fireEvent, cleanup } from 'react-testing-library';
